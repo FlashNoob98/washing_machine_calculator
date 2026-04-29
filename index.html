@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ritardo Lavastoviglie</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Ritarda avvio lavastoviglie</h1>
+    <p>Calcola quando avviare la lavastoviglie in modo che il programma finisca all'orario desiderato.</p>
+
+    <div class="card">
+      <div class="field">
+        <label>Ora locale da internet</label>
+        <div id="current-time" class="value">Caricamento...</div>
+      </div>
+
+      <div class="field">
+        <label>Durata del programma</label>
+        <div class="duration-inputs">
+          <input type="number" id="duration-hours" min="0" value="1" />
+          <span>ore</span>
+          <input type="number" id="duration-minutes" min="0" max="59" value="30" />
+          <span>minuti</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Orario di fine desiderato</label>
+        <input type="time" id="target-end" />
+      </div>
+
+      <button id="calculate">Calcola ritardo</button>
+
+      <div id="result" class="result"></div>
+      <div id="error" class="error"></div>
+    </div>
+
+    <p class="note">L'ora viene presa automaticamente da <strong>Internet</strong>. Se il caricamento fallisce, controlla la connessione di rete.</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
