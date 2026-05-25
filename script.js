@@ -100,7 +100,7 @@ function showResult() {
     resultEl.innerHTML = `
       Orario di fine richiesto: <strong>${formatTime(targetDate)}</strong><br />
       Durata programma: <strong>${durationHoursInput.value}h ${durationMinutesInput.value}m</strong><br />
-      Avvia la lavastoviglie alle: <strong>${startDate.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' })}</strong><br />
+      Avvia la lavastoviglie/lavatrice alle: <strong>${startDate.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' })}</strong><br />
       Ritardo consigliato: <strong>${delayMs <= 0 ? 'Avvia immediatamente' : formatDuration(delayMs)}</strong>
     `;
     resultEl.style.display = 'block';
