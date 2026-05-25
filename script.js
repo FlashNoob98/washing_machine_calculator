@@ -26,23 +26,10 @@ function updateDisplayClock() {
   currentTimeEl.textContent = formatTime(currentDate);
 }
 
-async function fetchInternetTime() {
-  try {
-    const response = await fetch('https://worldtimeapi.org/api/ip');
-    if (!response.ok) {
-      throw new Error('Impossibile leggere l’ora da Internet');
-    }
-
-    const data = await response.json();
-    const serverDate = new Date(data.datetime);
-    currentDate = serverDate;
-    currentTimeEl.textContent = formatTime(currentDate);
-    errorEl.textContent = '';
-  } catch (error) {
-    currentDate = new Date();
-    currentTimeEl.textContent = formatTime(currentDate);
-    errorEl.textContent = 'Impossibile ottenere l’ora da Internet. Uso l’orologio del dispositivo.';
-  }
+function fetchInternetTime() {
+  currentDate = new Date();
+  currentTimeEl.textContent = formatTime(currentDate);
+  errorEl.textContent = '';
 }
 
 function parseTargetEndTime() {
@@ -106,20 +93,26 @@ function formatDuration(ms) {
     .replace(/^00:/, '')
     .replace(/^0/, '');
 }
-
 function showResult() {
   try {
     const { targetDate, startDate, delayMs } = computeDelay();
+
     resultEl.innerHTML = `
       Orario di fine richiesto: <strong>${formatTime(targetDate)}</strong><br />
       Durata programma: <strong>${durationHoursInput.value}h ${durationMinutesInput.value}m</strong><br />
       Avvia la lavastoviglie alle: <strong>${startDate.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' })}</strong><br />
       Ritardo consigliato: <strong>${delayMs <= 0 ? 'Avvia immediatamente' : formatDuration(delayMs)}</strong>
     `;
+    resultEl.style.display = 'block';
     errorEl.textContent = '';
+    errorEl.style.display = 'none';
+
   } catch (error) {
+
     resultEl.textContent = '';
+
     errorEl.textContent = error.message;
+    errorEl.style.display = 'block';
   }
 }
 
@@ -127,4 +120,4 @@ calculateButton.addEventListener('click', showResult);
 
 fetchInternetTime();
 setInterval(updateDisplayClock, 1000);
-setInterval(fetchInternetTime, 5 * 60 * 1000);
+//setInterval(fetchInternetTime, 5 * 60 * 1000);

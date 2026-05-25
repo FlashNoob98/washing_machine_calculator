@@ -96,6 +96,7 @@ button:hover {
 
 .result,
 .error {
+  display: none;
   min-height: 48px;
   padding: 16px;
   border-radius: 16px;
@@ -108,6 +109,7 @@ button:hover {
 }
 
 .error {
+  display: none;
   background: #fee2e2;
   color: #991b1b;
 }
@@ -116,4 +118,53 @@ button:hover {
   margin-top: 20px;
   color: #475569;
   font-size: 0.95rem;
+}
+
+/* Prevent overflow on narrow viewports */
+.container,
+.card,
+.field,
+.duration-inputs {
+  min-width: 0;
+}
+
+.value,
+input[type="time"],
+input[type="number"],
+button {
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.value {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Responsive tweaks for small screens */
+@media (max-width: 480px) {
+  .container {
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .duration-inputs {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .duration-inputs input {
+    width: 100%;
+    min-width: 0;
+  }
+
+  input[type="time"],
+  input[type="number"] {
+    padding: 12px 14px;
+  }
+
+  button {
+    width: 100%;
+  }
 }
